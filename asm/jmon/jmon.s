@@ -226,7 +226,7 @@
   OUTCH     = $1EA0
 ; Note: ECHO not defined because KIM-1 always echoes characters back.
 .elseif .defined(SBC)
-  BASIC   = $DD09               ; BASIC Cold Start
+  BASIC   = COLD_START          ; BASIC Cold Start
   ECHO    = 1                   ; Need to echo commands
   BRKVECTOR = $FFFE             ; Break/interrupt vector (2 bytes)
   MONCOUT = $FF3B               ; Console out routine

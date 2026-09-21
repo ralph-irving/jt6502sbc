@@ -295,6 +295,7 @@ TOKEN_PRINT=$80+(*-TOKEN_ADDRESS_TABLE)/2
 .endif
 		.word CLEAR-1
 		.word NEW-1
+		.word JMON-1
 TOKEN_TAB=$00+$80+(*-TOKEN_ADDRESS_TABLE)/2
 TOKEN_TO=$01+$80+(*-TOKEN_ADDRESS_TABLE)/2
 TOKEN_FN=$02+$80+(*-TOKEN_ADDRESS_TABLE)/2
@@ -389,6 +390,7 @@ TOKEN_NAME_TABLE:
 .endif
 		.byte "CLEA", $80+'R'
 		.byte "NE", $80+'W'
+		.byte "JMO", $80+'N'
 		.byte "TAB", $80+'('
 		.byte "T", $80+'O'
 		.byte "F", $80+'N'
@@ -1061,6 +1063,11 @@ L251F:
         clc
 L2520:
         rts
+; ----------------------------------------------------------------------------
+; "JMON" STATEMENT
+; ----------------------------------------------------------------------------
+JMON:
+        jmp     $E100              ; JMON entry point
 ; ----------------------------------------------------------------------------
 ; "NEW" STATEMENT
 ; ----------------------------------------------------------------------------
