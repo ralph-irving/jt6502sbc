@@ -295,6 +295,7 @@ TOKEN_PRINT=$80+(*-TOKEN_ADDRESS_TABLE)/2
 .endif
 		.word CLEAR-1
 		.word NEW-1
+		.word CALL-1
 		.word JMON-1
 TOKEN_TAB=$00+$80+(*-TOKEN_ADDRESS_TABLE)/2
 TOKEN_TO=$01+$80+(*-TOKEN_ADDRESS_TABLE)/2
@@ -390,6 +391,7 @@ TOKEN_NAME_TABLE:
 .endif
 		.byte "CLEA", $80+'R'
 		.byte "NE", $80+'W'
+		.byte "CAL", $80+'L'
 		.byte "JMO", $80+'N'
 		.byte "TAB", $80+'('
 		.byte "T", $80+'O'
@@ -1063,6 +1065,21 @@ L251F:
         clc
 L2520:
         rts
+; ----------------------------------------------------------------------------
+; "CALL" STATEMENT (from Applesoft)
+; Effectively performs a JSR to the specified address, with the following
+; register contents:
+;
+;   (A,Y) = call address
+;   X-reg = $AC
+;
+; The called routine can return with RTS, and BASIC will continue with the
+; next statement.
+; ----------------------------------------------------------------------------
+CALL:
+        jsr     FRMNUM            ; evalute expression for CALL address
+        jsr     GETADR            ; convert expression to 16-bit integer
+        jmp     (LINNUM)          ; in LINNUM, and jump there
 ; ----------------------------------------------------------------------------
 ; "JMON" STATEMENT
 ; ----------------------------------------------------------------------------
