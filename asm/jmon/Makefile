@@ -5,6 +5,8 @@
 #PLATFORM=KIM1
 PLATFORM=SBC
 
+CC65DIR=/opt/cc65
+
 all: jmon.mon jmon.lod jmon.ptp jmon.jm jmon.run
 
 # RUN file
@@ -22,7 +24,7 @@ jmon.mon: jmon.bin
 
 # OSI version binary
 jmon.lod: jmon.bin
-	~/git/mine/6502/asm/OSI/bintolod -s 0380 -l 0380 jmon.bin >jmon.lod
+	../OSI/bintolod -s 0380 -l 0380 jmon.bin >jmon.lod
 
 # KIM-1 version binary
 jmon.ptp: jmon.bin
@@ -32,7 +34,7 @@ send:	jmon.lod
 	ascii-xfr -s jmon.lod  >/dev/ttyUSB0
 
 jmon.bin: jmon.o
-	ld65 -C /usr/local/share/cc65/cfg/none.cfg -vm -m jmon.map -o jmon.bin jmon.o
+	ld65 -C $(CC65DIR)/share/cc65/cfg/none.cfg -vm -m jmon.map -o jmon.bin jmon.o
 
 jmon.o:	jmon.s disasm.s miniasm.s trace.s info.s memtest4.s
 	ca65 -D$(PLATFORM) -g -l jmon.lst jmon.s
