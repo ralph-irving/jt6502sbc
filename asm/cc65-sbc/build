@@ -11,6 +11,7 @@ cd cc65
 
 echo "*** Applying patch ***"
 patch -p1 <../cc65-sbc.patch
+patch -p1 <../cc65-sbc-2.patch
 
 echo "*** Building ***"
 make -s -j4
