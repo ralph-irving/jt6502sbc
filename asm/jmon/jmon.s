@@ -277,7 +277,7 @@ JMON:
         LDA #$40                ; Default stack pointer for running program
         STA SAVE_S              ; ($00 is bad choice since BRK vector is at $0100 on OSI)
         JSR BPSETUP             ; initialization for breakpoints
-        JSR ClearScreen
+        JSR PrintCR
 
 ; Display Welcome message
         LDX #<WelcomeMessage
