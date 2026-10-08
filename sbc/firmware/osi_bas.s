@@ -50,7 +50,11 @@ CONFIG_SMALL := 1
 ZP_START1 = $00
 ZP_START2 = $0D
 ZP_START3 = $5B
+.ifdef CONFIG_SMALL
 ZP_START4 = $65
+.else
+ZP_START4 = $66
+.endif
 
 ;extra ZP variables
 USR             := $000A
